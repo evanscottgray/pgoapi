@@ -180,4 +180,9 @@ def generateRequestHash(authticket, request):
 
 
 def d2h(f):
-    return hex(struct.unpack('<Q', struct.pack('<d', f))[0])[2:-1].decode("hex")
+    h = hex(struct.unpack('<Q', struct.pack('<d', f))[0]) 
+    try:
+        ret = h.split('0x')[-1].decode('hex')
+    except:
+        ret = h[2:-1].decode('hex')
+    return ret
